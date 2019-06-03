@@ -1,0 +1,15 @@
+<div class="myForm">
+<h1>Technical Task</h1>
+<p>
+  <input type="text" placeholder="Enter your name"[(ngModel)]="name" />
+ <br/>
+ <br/>
+ <select type="number" [(ngModel)]="selectedQuize">
+   <option value="" selected disabled hidden>Choose here</option>
+   <option *ngFor="let quiz of quizes" [ngValue]="quiz">{{quiz.title}}</option>
+ </select>
+ <br/>
+ <br/>
+<button class="btn btn-primary" type="button" (click)="start()"><span class="icon-play-white _hover"></span><span>Start</span></button>
+</p>
+</div>
