@@ -2,7 +2,7 @@
 <br/>
 
 
-
+<div class="myForm">
 <div class="progress">
   <div class="progress-bar" id="#progressBar" role="progressbar" [style.width]= "width+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Page {{currentQuestionNo}} of {{questions.length}}</div>
 </div>
@@ -12,14 +12,19 @@
    </p>
 
 
- <div class="checkbox" *ngFor="let option of options">
+<div class="row">
+ <div class="ck-button col-lg-4" *ngFor="let option of options">
+           
+              <input type="checkbox" value="{{option.id}}" (change)="onCheckboxChange(option,$event)">{{option.title}} 
+
             
-              <input type="checkbox" value="{{option.id}}" (change)="onCheckboxChange(option,$event)">{{option.title}}
             
  </div>
-       
+</div>
 
-        <button class="btn btn-primary" type="button" (click)="next()"><span class="icon-play-white _hover"></span><span> Next</span></button>
+
+<div class="row"> 
+  <button class="btn btn-primary" type="button" (click)="next()"><span class="icon-play-white _hover"></span><span> Next</span></button>
+</div>
   
-<p>{{debug3}}  
-<p>{{debug4}} 
+

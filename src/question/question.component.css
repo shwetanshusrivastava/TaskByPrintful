@@ -1,0 +1,52 @@
+.myForm{
+  /* padding: 20 px; */
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.checkbox {
+  padding: 5px;
+}
+
+
+iv label input {
+   margin-right:100px;
+}
+body {
+    font-family:sans-serif;
+}
+
+.ck-button {
+    margin:4px;
+    background-color:#EFEFEF;
+    border-radius:4px;
+    border:1px solid #D0D0D0;
+    overflow:auto;
+    float:left;
+}
+
+.ck-button:hover {
+    background: lightskyblue;
+    color:#fff;
+}
+
+.ck-button label {
+    float:left;
+    width:4.0em;
+}
+
+.ck-button label {
+    text-align:center;
+    padding:3px 0px;
+    display:block;
+}
+
+.ck-button label input {
+    position:absolute;
+    top:-20px;
+}
+
+.ck-button input:checked {
+    background:rgb(13, 13, 80);
+    color:#fff;
+}
