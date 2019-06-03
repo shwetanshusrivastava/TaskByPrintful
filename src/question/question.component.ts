@@ -63,50 +63,50 @@ export class QuestionComponent implements OnInit {
 
   }
 
-formParams:Array<Object> = [];
-selectedEntry;
-radioChecked:boolean = false;
-onSelectionChange(selectedOption) {
-  // this.selectedEntry.id = selectedOption
-  this.selectedEntry = selectedOption;
-  // this.selectedEntry.quesId = this.currentQuestion.id;
-  // this.selectedEntry.optionSelected = selectedOption.id;
-  // alert(selectedOption.id);
-  this.radioChecked = true;
- 
-  
+//for checkboxes
+checkedList:Array<Object> = [];
+onCheckboxChange(option, event) {
+     if(event.target.checked) {
+       this.checkedList.push(option.id);
+     } else {
+     for(var i=0 ; i < this.options.length; i++) {
+       if(this.checkedList[i] == option.id) {
+         this.checkedList.splice(i,1);
+      }
+    }
+  }
+  console.log(this.checkedList);
 }
 
-model:any = {};
-
-
-//  get debug() { 
-//     return JSON.stringify(this.model); 
+get debug3() { 
+    return JSON.stringify(this.checkedList); 
     
-//   }
+  }
 
-// get debug2() { 
-//     return JSON.stringify(this.formParams); 
+  get debug4() { 
+    return JSON.stringify(this.selectedAnswers); 
     
-//   }
+  }
 
-// 100/questions.length*currentQuestionNo
 width:number = (100*this.currentQuestionNo)/ this.questions.length;
-  next() {
-  
-    if(this.radioChecked) {
-        this.radioChecked = false;
-         this.formParams.push(this.model);
-        this.model = {};
-        this.datatransferService.setQuizId(this.quizId);
-        this.datatransferService.setData(this.formParams);
+
+selectedAnswers:Array<Object> = [];
+
+//Click Next After selecting answers
+next() {
+  if(this.checkedList.length) {
+      console.log(this.checkedList);
+      for(let j=0 ; j < this.checkedList.length; j++) {
+        this.selectedAnswers.push(this.checkedList[j]);
+       }
+      // this.selectedAnswers.push(this.checkedList);
+      this.checkedList = [];
+      this.datatransferService.setQuizId(this.quizId);
+      this.datatransferService.setMultiChoiceData(this.selectedAnswers);
 
         this.width = (100*this.currentQuestionNo)/ this.questions.length;
 
-        console.log('>>>>>'+this.width);
-        // console.log('#progressBar');
-        // ('#progressBar').setStyle('width',this.width+'%');
-      if(this.currentQuestionNo < this.questions.length){
+        if(this.currentQuestionNo < this.questions.length){
         this.currentQuestionNo++;
         this.currentQuestion = this.questions[this.currentQuestionNo-1];
           this.getAnswerOptions(this.currentQuestion.id)
@@ -117,9 +117,9 @@ width:number = (100*this.currentQuestionNo)/ this.questions.length;
       } else {
         this.router.navigateByUrl('/result');
       }
-
-    }else {
-      alert('Select one option');
-    }
+  }else{
+    alert("choose one option");
   }
+}
+  
 }

@@ -12,24 +12,32 @@ export class ResultComponent implements OnInit {
   constructor(private httpService: HttpClient, private datatransferService:DataTransferService) { }
   name:string = '';
   score:Object = {};
-  formParams:Array<Object> = [];
+  
+  selectedAnswers:Array<Object> = [];
+
   answerString:string = '';
   quizId:number = 0;
+
   ngOnInit() {
-   this.formParams =  this.datatransferService.getData();
-   this.quizId = this.datatransferService.getQuizId();
-   this.formParams.forEach(option => {
-      console.log(option.options);
-      this.answerString += '&answers[]='+option.options;
-      console.log(this.answerString)
-    })
-  this.name = this.datatransferService.getName();
-   console.log(this.formParams);
-    this.getScore()
-    .subscribe((data: Object) => {
-        this.score = data;
-    }
-    );
+      this.selectedAnswers = this.datatransferService.getMultiChoiceData()
+
+      this.quizId = this.datatransferService.getQuizId();
+
+      
+
+      this.selectedAnswers.forEach(option => {
+          console.log(option);
+          this.answerString += '&answers[]='+option;
+          console.log(this.answerString)
+        })
+
+      this.name = this.datatransferService.getName();
+      
+        this.getScore()
+        .subscribe((data: Object) => {
+            this.score = data;
+        }
+        );
   }
 
   getScore() {
